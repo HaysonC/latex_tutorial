@@ -9,8 +9,7 @@
 *.fdb_latexmk
 *.synctex.gz
 *.bcf
-
-
+*.run.xml
 # macOS specific files
 .DS_Store
 # Thumbnails

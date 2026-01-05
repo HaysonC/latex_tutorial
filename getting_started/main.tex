@@ -256,6 +256,41 @@ LaTeX automatically numbers headings and provides organization.
 
 \vspace{1em}
 
+\Part{Sections, Subsections and Paragraphs}
+LaTeX provides commands to structure your document into sections, subsections, and paragraphs.
+\subsection*{Creating Sections and Subsections}
+Use the following commands to create sections and subsections:
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Sectioning Commands}]
+\begin{verbatim}
+\section{Section Title}          % Creates a new section
+This is some text
+\subsection{Subsection Title}    % Creates a new subsection
+This is some more text
+\subsubsection{Subsubsection Title} % Creates a new subsubsection
+This is even more text
+
+The paragraph command creates a new paragraph.
+It indents the first line of the paragraph.
+\paragraph{Paragraph Title}      % Creates a new paragraph
+This is the text of the paragraph.
+
+\paragraph{}
+This is another paragraph without a title.
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output Example:}
+\section{Introduction}
+This is some text.
+\subsection{Background}
+This is some more text.
+\subsubsection{Details}
+This is even more text.
+\paragraph{Key Points}
+This is the text of the paragraph.
+\paragraph{}
+This is another paragraph without a title.
+
 \Part{Creating Tables}
 
 Tables in LaTeX require the \texttt{tabular} environment. This is best learned by example.
@@ -313,7 +348,7 @@ Use the \texttt{table} environment with a caption:
     \hline
     Item & Price \\
     \hline
-    Coffee & \$3.50 \\
+    Coffee & \$6.7 \\
     \hline
   \end{tabular}
   \caption{Table 1: Sample Prices}
@@ -324,15 +359,16 @@ Use the \texttt{table} environment with a caption:
 
 \textbf{Output:}
 \begin{table}[h]
+ \caption{Table 1: Sample Prices}
   \centering
   \begin{tabular}{|c|c|}
     \hline
     \textbf{Item} & \textbf{Price} \\
     \hline
-    Coffee & \$3.50 \\
+    Coffee & \$6.7 \\
     \hline
   \end{tabular}
-  \caption{Table 1: Sample Prices}
+  
   \label{tab:prices}
 \end{table}
 
@@ -342,7 +378,7 @@ Use the \texttt{table} environment with a caption:
 \begin{itemize}[nosep]
     \item Use \texttt{\textbackslash caption\{\}} to add a caption
     \item Use \texttt{\textbackslash label\{\}} to reference the table later with \texttt{\textbackslash ref\{tab:name\}}
-    \item Captions appear below tables
+    \item Captions should be above the actual table for tables (for figures, captions go below, this is standard convention).
 \end{itemize}
 
 \subsection*{Using Online Table Generators or AI}
@@ -1174,7 +1210,7 @@ See Section \ref{sec:mysection} for more details.
     \item Labels only work with numbered objects (sections, tables with captions, figures with captions, equations)
 \end{itemize}
 
-\Part{Table of Contents}
+\Part{``Table of Contents}
 
 LaTeX can automatically generate a table of contents from your section headings.
 
@@ -1220,6 +1256,7 @@ By default, all sections and subsections appear. To control which levels are inc
 \tableofcontents
 \end{verbatim}
 \end{tcolorbox}
+
 
 \Part{Title Pages}
 
