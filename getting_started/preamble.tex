@@ -1,0 +1,58 @@
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\usepackage{graphicx}         % For inserting images
+\usepackage{amsmath}          % For advanced math equations
+\usepackage{amssymb}          % For math symbols
+\usepackage{amsthm}           % For theorem, definition, and proof environments
+\usepackage{array}            % For advanced table formatting
+\usepackage[caption=false]{subfig}  % For captions on figures
+\usepackage[style=apa]{biblatex}    % For APA style citations (requires bibtex)
+\usepackage{fancyhdr}         % For fancy headers and footers
+
+% Color definitions
+\definecolor{overleafBlue}{RGB}{230,245,255}
+\definecolor{localGreen}{RGB}{235,250,235}
+\definecolor{warningRed}{RGB}{255,240,240}
+\definecolor{titleGray}{RGB}{80,80,80}
+\definecolor{codeGray}{RGB}{245,245,245}
+
+\tcbset{
+    colframe=black,
+    boxrule=0.8pt,
+    arc=4pt,
+    left=8pt,
+    right=8pt,
+    top=6pt,
+    bottom=6pt
+}
+
+% Configure hyperref for better link appearance
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    pdftitle={Getting Started with LaTeX}
+}
+
+% Theorem-style environments
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+
+% Custom counter and command for automatic Part numbering
+\newcounter{partcounter}
+\setcounter{partcounter}{0}
+
+% Define custom \Part command with automatic numbering
+\newcommand{\Part}[1]{%
+    \stepcounter{partcounter}%
+    \section*{Part \thepartcounter: #1}}

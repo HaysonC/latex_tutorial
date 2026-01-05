@@ -1,0 +1,1666 @@
+\documentclass[11pt]{article}
+\input{preamble} % best practice to separate preamble
+
+\addbibresource{references.bib}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{Getting Started with LaTeX}}\\
+    \vspace{4pt}
+    {\large \textbf{Your First LaTeX Document}}\\
+    \vspace{6pt}
+    {\color{titleGray}Last Updated: \today}
+\end{center}
+
+\vspace{1em}
+
+\section*{Introduction}
+Welcome to LaTeX! This document will teach you the fundamental skills needed to create professional-looking documents. Each section includes code examples and their corresponding output.
+
+\vspace{1em}
+
+\begin{tcolorbox}[colback=overleafBlue, title=\textbf{Important}]
+After reviewing this guide, open the \texttt{first\_latex} folder to practice what you've learned. All examples here can be tested in that working directory.
+\end{tcolorbox}
+
+\vspace{1em}
+
+\Part{Essential Packages and Preamble Setup}
+
+Before we start writing content, it's important to understand what packages you need and why. A \textbf{package} is an extension that adds functionality to LaTeX.
+
+\subsection*{Understanding the Preamble}
+
+The \textbf{preamble} is everything between \texttt{\textbackslash documentclass} and \texttt{\textbackslash begin\{document\}}. It defines your document's style and loads required packages.
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Basic Preamble Example}]
+\begin{verbatim}
+\documentclass[11pt]{article}
+
+% Load packages (these add features to LaTeX)
+\usepackage[margin=1in]{geometry}        % Page margins
+\usepackage{hyperref}                    % Clickable links
+\usepackage{graphicx}                    % Insert images
+\usepackage{amsmath, amssymb}            % Math equations
+\usepackage{array}                       % Advanced tables
+\usepackage[style=apa]{biblatex}         % APA citations
+
+\addbibresource{references.bib}          % Link to bibliography file
+
+\begin{document}
+  % Your document content goes here
+\end{document}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection*{Key Packages Explained}
+
+\begin{itemize}[nosep]
+    \item \texttt{geometry} --- Controls page margins and layout
+    \item \texttt{hyperref} --- Enables clickable links and URLs
+    \item \texttt{graphicx} --- Allows you to insert images
+    \item \texttt{amsmath, amssymb} --- Advanced mathematical typesetting
+    \item \texttt{array} --- Enhanced table formatting
+    \item \texttt{biblatex} --- Professional citation and bibliography management (APA/MLA styles)
+    \item \texttt{xcolor, tcolorbox} --- Colors and colored boxes (for highlighting)
+\end{itemize}
+
+\subsection*{Best Practice: Separate Your Preamble}
+
+To keep documents organized, store your preamble in a separate file called \texttt{preamble.tex} and import it:
+
+\begin{tcolorbox}[colback=localGreen, title=\textbf{Recommended Structure}]
+\begin{verbatim}
+% In main.tex:
+\documentclass[11pt]{article}
+\input{preamble}  % Loads preamble.tex
+
+\begin{document}
+  Your content here...
+\end{document}
+\end{verbatim}
+\end{tcolorbox}
+
+\vspace{1em}
+
+\Part{Formatting Text}
+
+\subsection*{Making Text Bold}
+
+To make text bold, use the \texttt{\textbackslash textbf\{\}} command.
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Code Example}]
+\begin{verbatim}
+This is normal text, but \textbf{this part is bold}.
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:} This is normal text, but \textbf{this part is bold}.
+
+\vspace{0.5em}
+
+You can also use \texttt{\textbackslash textit\{\}} for \textit{italics} and \texttt{\textbackslash texttt\{\}} for \texttt{monospace text}.
+
+\vspace{1em}
+
+\subsection*{Centering Text}
+
+Use the \texttt{center} environment to center text on the page.
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Code Example}]
+\begin{verbatim}
+\begin{center}
+    This text is centered on the page.
+    \vspace{0.5em}
+    {\Large This is large centered text}
+\end{center}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+\begin{center}
+    This text is centered on the page.
+    \vspace{0.2em}
+    {\Large This is large centered text}
+\end{center}
+
+\vspace{0.5em}
+
+\textbf{Size commands:} Use \texttt{\textbackslash small}, \texttt{\textbackslash Large}, \texttt{\textbackslash huge}, etc. to adjust font size.
+
+\vspace{1em}
+
+\subsection*{Changing Fonts}
+
+LaTeX allows you to change fonts in several ways. Here are the most common approaches:
+
+\subsubsection*{Font Family Commands}
+
+Change the font for selected text using these commands:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Font Family Commands}]
+\begin{verbatim}
+% Roman (serif) - default
+This is \textbf{normal text}.
+
+% Sans serif
+{\sffamily This text is in sans serif font.}
+
+% Typewriter (monospace)
+{\ttfamily This text is monospace (code-like).}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+
+This is normal text.
+
+{\sffamily This text is in sans serif font.}
+
+{\ttfamily This text is monospace (code-like).}
+
+\vspace{0.5em}
+
+\subsubsection*{Larger Font Regions}
+
+To change the font for larger sections, use:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Font Family Environments}]
+\begin{verbatim}
+\begin{sloppypar}
+\sffamily
+This entire paragraph is now in sans serif font.
+You can type multiple sentences and paragraphs here,
+and they will all use the sans serif style until
+the group or environment ends.
+\end{sloppypar}
+
+Back to normal font.
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+
+{\sffamily This entire paragraph is now in sans serif font. You can type multiple sentences and paragraphs here, and they will all use the sans serif style until the group or environment ends.}
+
+Back to normal font.
+
+\vspace{0.5em}
+
+\subsubsection*{Combining Font Styles}
+
+You can combine font families with bold, italic, and size changes:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Combined Font Styles}]
+\begin{verbatim}
+% Sans serif + bold
+{\sffamily\bfseries Important Notice in Sans Serif}
+
+% Typewriter + italic
+{\ttfamily\itshape code_with_emphasis}
+
+% Size + font family
+{\sffamily\Large Large sans serif text}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+
+{\sffamily\bfseries Important Notice in Sans Serif}
+
+{\ttfamily\itshape code\_with\_emphasis}
+
+{\sffamily\Large Large sans serif text}
+
+\vspace{0.5em}
+
+\subsubsection*{Font Family Reference}
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Command} & \textbf{Font Style} & \textbf{Example} \\
+    \hline
+    \texttt{\textbackslash rmfamily} (default) & Roman/Serif & {\rmfamily Roman text} \\
+    \hline
+    \texttt{\textbackslash sffamily} & Sans Serif & {\sffamily Sans serif text} \\
+    \hline
+    \texttt{\textbackslash ttfamily} & Typewriter & {\ttfamily Typewriter text} \\
+    \hline
+  \end{tabular}
+  \caption{Table 3: Font Family Commands}
+\end{table}
+
+\vspace{0.5em}
+
+\textbf{Note:} These are the three default fonts in LaTeX. To use advanced fonts like Helvetica, Times, or custom fonts, you may need additional packages (like \texttt{fontspec}) or compile with \texttt{xelatex} or \texttt{lualatex}.
+
+\vspace{1em}
+
+\Part{Headings and Structure}
+
+LaTeX automatically numbers headings and provides organization.
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Heading Hierarchy}]
+\begin{verbatim}
+\section{Main Heading}           % Level 1
+\subsection{Subheading}          % Level 2
+\subsubsection{Sub-subheading}   % Level 3
+
+% Use * to remove numbering:
+\section*{Unnumbered Heading}
+\end{verbatim}
+\end{tcolorbox}
+
+\vspace{1em}
+
+\Part{Creating Tables}
+
+Tables in LaTeX require the \texttt{tabular} environment. This is best learned by example.
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Simple Table Code}]
+\begin{verbatim}
+\begin{center}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Name} & \textbf{Age} & \textbf{City} \\
+    \hline
+    Alice & 25 & New York \\
+    \hline
+    Bob & 30 & Los Angeles \\
+    \hline
+  \end{tabular}
+\end{center}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+\begin{center}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \textbf{Name} & \textbf{Age} & \textbf{City} \\
+    \hline
+    Alice & 25 & New York \\
+    \hline
+    Bob & 30 & Los Angeles \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\vspace{0.5em}
+
+\subsection*{Understanding Table Syntax}
+
+\begin{itemize}[nosep]
+    \item \texttt{\{|c|c|c|\}} --- Three centered columns with borders
+    \item \texttt{\&} --- Separates columns
+    \item \texttt{\textbackslash\textbackslash} --- Ends a row
+    \item \texttt{\textbackslash hline} --- Horizontal line
+    \item \texttt{c} = centered, \texttt{l} = left-aligned, \texttt{r} = right-aligned
+\end{itemize}
+
+\subsection*{Adding a Caption to a Table}
+
+Use the \texttt{table} environment with a caption:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Table with Caption}]
+\begin{verbatim}
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    Item & Price \\
+    \hline
+    Coffee & \$3.50 \\
+    \hline
+  \end{tabular}
+  \caption{Table 1: Sample Prices}
+  \label{tab:prices}
+\end{table}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    \textbf{Item} & \textbf{Price} \\
+    \hline
+    Coffee & \$3.50 \\
+    \hline
+  \end{tabular}
+  \caption{Table 1: Sample Prices}
+  \label{tab:prices}
+\end{table}
+
+\vspace{0.5em}
+
+\textbf{Key points:}
+\begin{itemize}[nosep]
+    \item Use \texttt{\textbackslash caption\{\}} to add a caption
+    \item Use \texttt{\textbackslash label\{\}} to reference the table later with \texttt{\textbackslash ref\{tab:name\}}
+    \item Captions appear below tables
+\end{itemize}
+
+\subsection*{Using Online Table Generators or AI}
+
+Writing LaTeX table syntax by hand can be tedious. You have two excellent alternatives:
+
+\begin{tcolorbox}[colback=localGreen, title=\textbf{Option 1: Online LaTeX Table Generator}]
+Websites like \href{https://www.tablesgenerator.com}{Tables Generator} allow you to:
+\begin{enumerate}[nosep]
+    \item Design your table visually in a GUI
+    \item Add rows, columns, and formatting
+    \item Auto-generate the LaTeX code
+    \item Copy and paste directly into your document
+\end{enumerate}
+This is the fastest way to create complex tables.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=localGreen, title=\textbf{Option 2: Use AI (ChatGPT, Claude, etc.)}]
+Ask ChatGPT to generate LaTeX table code:
+\begin{verbatim}
+"Create a LaTeX table with 3 columns for Name, Age, 
+and City. Include sample data for 5 people. Add a 
+caption 'Table X: Sample Data' and make headers bold."
+\end{verbatim}
+
+ChatGPT will generate the complete \texttt{table} environment with proper formatting that you can copy directly into your document.
+\end{tcolorbox}
+
+\textbf{Recommendation:} For simple tables, write them manually to learn syntax. For complex tables, use an online generator or AI to save time.
+
+
+\Part{Inserting Images}
+
+To insert an image, use the \texttt{graphicx} package and the \texttt{\textbackslash includegraphics\{\}} command.
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Simple Image Code}]
+\begin{verbatim}
+\begin{center}
+  \includegraphics[width=3in]{shrek.jpg}
+\end{center}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection*{Image Parameters}
+
+\begin{itemize}[nosep]
+    \item \texttt{width=3in} --- Set image width (3 inches)
+    \item \texttt{height=2in} --- Set image height
+    \item \texttt{scale=0.5} --- Scale by 50\%
+\end{itemize}
+
+\subsection*{Adding a Caption to a Figure}
+
+Use the \texttt{figure} environment with a caption:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Figure with Caption}]
+\begin{verbatim}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4in]{shrek.jpg}
+  \caption{Figure 1: A sample image}
+  \label{fig:shrek}
+\end{figure}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Key points:}
+\begin{itemize}[nosep]
+    \item The \texttt{[h]} option tells LaTeX to place the figure \textbf{here} (approximately)
+    \item \texttt{\textbackslash caption\{\}} goes \textbf{below} the image for figures
+    \item \texttt{\textbackslash label\{\}} allows you to reference with \texttt{\textbackslash ref\{fig:name\}}
+\end{itemize}
+
+\subsection*{Figure Placement Options}
+
+The parameter in square brackets \texttt{[...]} controls where LaTeX attempts to place the figure:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Figure Placement Parameters}]
+\begin{verbatim}
+\begin{figure}[h]    % Here - at approximately this location
+  \centering
+  \includegraphics[width=3in]{shrek.jpg}
+  \caption{Figure placed here}
+\end{figure}
+
+\begin{figure}[t]    % Top of page
+  \centering
+  \includegraphics[width=3in]{shrek.jpg}
+  \caption{Figure at top of page}
+\end{figure}
+
+\begin{figure}[b]    % Bottom of page
+  \centering
+  \includegraphics[width=3in]{shrek.jpg}
+  \caption{Figure at bottom of page}
+\end{figure}
+
+\begin{figure}[p]    % On a page of floats (figures/tables only)
+  \centering
+  \includegraphics[width=3in]{shrek.jpg}
+  \caption{Figure on dedicated float page}
+\end{figure}
+
+\begin{figure}[h!]   % HERE! (forces placement, ignores LaTeX's judgment)
+  \centering
+  \includegraphics[width=3in]{shrek.jpg}
+  \caption{Figure forced to this location}
+\end{figure}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Placement parameter guide:}
+\begin{itemize}[nosep]
+    \item \texttt{h} --- Here (approximately, LaTeX may move it)
+    \item \texttt{t} --- Top of the page
+    \item \texttt{b} --- Bottom of the page
+    \item \texttt{p} --- Dedicated page for floats
+    \item \texttt{!} --- Override LaTeX's strictness (use with h, t, b, or p)
+\end{itemize}
+
+\textbf{Pro tip:} Combine options like \texttt{[htbp]} to give LaTeX multiple acceptable placements. Use \texttt{[h!]} only when absolutely necessary, as it can disrupt document flow.
+
+\subsection*{Image Sizing with \texttt{\textbackslash linewidth}}
+
+Use \texttt{\textbackslash linewidth} to scale images relative to the page/column width:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Linewidth Sizing}]
+\begin{verbatim}
+% Full width of the page (100%)
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{shrek.jpg}
+  \caption{Image takes full page width}
+\end{figure}
+
+% 80% of page width
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\linewidth]{shrek.jpg}
+  \caption{Image is 80% of page width}
+\end{figure}
+
+% 50% of page width (2 images side-by-side)
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.45\linewidth]{shrek.jpg}
+  \includegraphics[width=0.45\linewidth]{shrek.jpg}
+  \caption{Two images at 45% each}
+\end{figure}
+
+% Specific measurements
+\includegraphics[width=4in]{shrek.jpg}      % 4 inches
+\includegraphics[width=10cm]{shrek.jpg}     % 10 centimeters
+\includegraphics[scale=0.5]{shrek.jpg}      % Scale to 50%
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Key sizing commands:}
+\begin{itemize}[nosep]
+    \item \texttt{\textbackslash linewidth} --- Width of the current line/column
+    \item \texttt{0.5\textbackslash linewidth} --- Half the page width
+    \item \texttt{width=4in} --- Specific width (inches)
+    \item \texttt{width=10cm} --- Specific width (centimeters)
+    \item \texttt{scale=0.5} --- Scale by percentage (50\%)
+    \item \texttt{height=2in} --- Set height (width scales proportionally)
+\end{itemize}
+
+\subsection*{Line Breaks and Page Breaks}
+
+Control spacing and page layout with these commands:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Spacing Commands}]
+\begin{verbatim}
+% Newline (line break within a paragraph)
+This is line one. \\
+This is line two on a new line.
+
+% Force small space before next line
+Some text \newline
+Next line with forced break.
+
+% Vertical spacing (adjust gap between elements)
+Some content here.
+\vspace{0.5cm}    % Add 0.5 cm of vertical space
+More content.
+
+% Page break (new page)
+This is the end of the first page.
+\newpage
+This starts on a new page.
+
+% Optional page break (can be ignored if not needed)
+\pagebreak
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Spacing command guide:}
+\begin{itemize}[nosep]
+    \item \texttt{\textbackslash\textbackslash} --- Line break (end line, stay in same paragraph)
+    \item \texttt{\textbackslash newline} --- Line break (alternative to \texttt{\textbackslash\textbackslash})
+    \item \texttt{\textbackslash vspace\{1cm\}} --- Add vertical space (1 cm in this example)
+    \item \texttt{\textbackslash hspace\{2cm\}} --- Add horizontal space
+    \item \texttt{\textbackslash newpage} --- Hard page break (starts new page immediately)
+    \item \texttt{\textbackslash pagebreak} --- Soft page break (LaTeX may ignore)
+    \item \texttt{\textbackslash clearpage} --- Outputs all pending floats, then starts new page
+\end{itemize}
+
+\subsection*{Practical Example: Multi-Figure Layout}
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Advanced Figure Example}]
+\begin{verbatim}
+\section{Results}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.6\linewidth]{shrek.jpg}
+  \caption{Figure 1: Main result showing Shrek}
+  \label{fig:main_result}
+\end{figure}
+
+See Figure \ref{fig:main_result} for the main result.
+
+\vspace{0.5cm}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.35\linewidth]{shrek.jpg}
+  \hspace{0.05\linewidth}
+  \includegraphics[width=0.35\linewidth]{shrek.jpg}
+  \caption{Figure 2: Side-by-side comparison}
+  \label{fig:comparison}
+\end{figure}
+
+\newpage
+
+\section{Discussion}
+Discussion of results continues on the new page...
+\end{verbatim}
+\end{tcolorbox}
+
+\vspace{1em}
+
+LaTeX excels at typesetting mathematics. This section covers all equation environments and numbering options.
+
+\subsection*{Inline Math}
+
+For math within text, use single dollar signs (\texttt{\$...\$}):
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Inline Equation Code}]
+\begin{verbatim}
+The equation $E = mc^2$ is Einstein's famous formula.
+The golden ratio is $\phi = \frac{1 + \sqrt{5}}{2}$.
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:} The equation $E = mc^2$ is Einstein's famous formula. The golden ratio is $\phi = \frac{1 + \sqrt{5}}{2}$.
+
+\vspace{1em}
+
+\subsection*{Single-Line Displayed Equations}
+
+For equations on their own line (unnumbered), use \texttt{\textbackslash[ ... \textbackslash]}:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Unnumbered Equation}]
+\begin{verbatim}
+\[
+  y = mx + b
+\]
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+\[
+  y = mx + b
+\]
+
+\vspace{0.5em}
+
+For a numbered equation, use the \texttt{equation} environment:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Numbered Equation}]
+\begin{verbatim}
+\begin{equation}
+  \int_0^{\infty} e^{-x^2} \, dx = \frac{\sqrt{\pi}}{2}
+  \label{eq:gaussian}
+\end{equation}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+\begin{equation}
+  \int_0^{\infty} e^{-x^2} \, dx = \frac{\sqrt{\pi}}{2}
+  \label{eq:gaussian}
+\end{equation}
+
+You can reference this equation later with \texttt{\textbackslash ref\{eq:gaussian\}} to get: Equation \ref{eq:gaussian}.
+
+\vspace{1em}
+
+\subsection*{Multiple Equations: Using \texttt{align}}
+
+The \texttt{align} environment is used for multiple equations that you want aligned (e.g., at the equals sign).
+
+\subsubsection*{Numbered Align Environment}
+
+Each line gets its own number:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Align with Numbers}]
+\begin{verbatim}
+\begin{align}
+  a + b &= c \\
+  x + y &= z \\
+  p + q &= r
+\end{align}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+\begin{align}
+  a + b &= c \\
+  x + y &= z \\
+  p + q &= r
+\end{align}
+
+\vspace{0.5em}
+
+Notice the \texttt{\&} symbol aligns the equals signs, and \texttt{\textbackslash\textbackslash} separates lines.
+
+\subsubsection*{Unnumbered Align Environment (\texttt{align*})}
+
+Use \texttt{align*} to suppress numbering on all lines:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Align without Numbers}]
+\begin{verbatim}
+\begin{align*}
+  (a + b)^2 &= a^2 + 2ab + b^2 \\
+  (a - b)^2 &= a^2 - 2ab + b^2 \\
+  a^2 - b^2 &= (a+b)(a-b)
+\end{align*}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+\begin{align*}
+  (a + b)^2 &= a^2 + 2ab + b^2 \\
+  (a - b)^2 &= a^2 - 2ab + b^2 \\
+  a^2 - b^2 &= (a+b)(a-b)
+\end{align*}
+
+\vspace{1em}
+
+\subsubsection*{Selective Numbering with \texttt{nonumber}}
+
+Use \texttt{\textbackslash nonumber} to suppress numbering on specific lines within \texttt{align}:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Align with Selective Numbering}]
+\begin{verbatim}
+\begin{align}
+  x^2 + y^2 &= z^2 \\
+  a + b &= c \nonumber \\
+  p &= q
+\end{align}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+\begin{align}
+  x^2 + y^2 &= z^2 \\
+  a + b &= c \nonumber \\
+  p &= q
+\end{align}
+
+Only the first and third equations are numbered. The second uses \texttt{\textbackslash nonumber}.
+
+\vspace{1em}
+
+\subsection*{Summary of Equation Environments}
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l|l|l|}
+    \hline
+    \textbf{Environment} & \textbf{Numbered?} & \textbf{Best For} \\
+    \hline
+    \texttt{\$...\$} & No & Inline math \\
+    \hline
+    \texttt{\textbackslash[...\textbackslash]} & No & Single equation, displayed \\
+    \hline
+    \texttt{equation} & Yes & Single equation, numbered \\
+    \hline
+    \texttt{equation*} & No & Single equation (alternative) \\
+    \hline
+    \texttt{align} & Yes (each line) & Multiple equations, aligned \\
+    \hline
+    \texttt{align*} & No & Multiple equations, no numbers \\
+    \hline
+  \end{tabular}
+  \caption{Table 3: Equation Environment Comparison}
+\end{table}
+
+\vspace{1em}
+
+\subsection*{Common Math Symbols and Notation}
+
+\begin{itemize}[nosep]
+    \item Superscripts: \texttt{\$x\^2\$} produces $x^2$
+    \item Subscripts: \texttt{\$x\_i\$} produces $x_i$
+    \item Fractions: \texttt{\$\textbackslash frac\{a\}\{b\}\$} produces $\frac{a}{b}$
+    \item Greek letters: \texttt{\$\textbackslash alpha, \textbackslash beta, \textbackslash gamma\$} produce $\alpha, \beta, \gamma$
+    \item Integrals: \texttt{\$\textbackslash int\$} produces $\int$
+    \item Summation: \texttt{\$\textbackslash sum\$} produces $\sum$
+    \item Square root: \texttt{\$\textbackslash sqrt\{x\}\$} produces $\sqrt{x}$
+    \item Limits: \texttt{\$\textbackslash lim\_\{x \textbackslash to 0\}\$} produces $\lim_{x \to 0}$
+\end{itemize}
+
+\Part{Theorems, Definitions, and Proofs}
+
+Mathematical and scientific documents often require formal statements like theorems, definitions, and proofs. LaTeX provides special environments for these through the \texttt{amsthm} package.
+
+\subsection*{Setting Up Theorem Environments}
+
+First, add to your preamble:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Preamble Setup}]
+\begin{verbatim}
+\usepackage{amsthm}
+
+% Define theorem environments
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\end{verbatim}
+\end{tcolorbox}
+
+This creates numbered environments that automatically number within each section.
+
+\subsection*{Using the Theorem Environment}
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Theorem Code}]
+\begin{verbatim}
+\begin{theorem}
+  For any right triangle, the sum of the squares of 
+  the two shorter sides equals the square of the 
+  hypotenuse.
+  \label{thm:pythagoras}
+\end{theorem}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+\begin{theorem}
+  For any right triangle, the sum of the squares of the two shorter sides equals the square of the hypotenuse.
+  \label{thm:pythagoras}
+\end{theorem}
+
+\vspace{0.5em}
+
+Notice LaTeX automatically adds the label ``Theorem 1'' and numbers it.
+
+\subsection*{Using the Definition Environment}
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Definition Code}]
+\begin{verbatim}
+\begin{definition}
+  A \textbf{prime number} is a natural number greater 
+  than 1 that has no positive divisors other than 
+  1 and itself.
+\end{definition}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+\begin{definition}
+  A \textbf{prime number} is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+\end{definition}
+
+\vspace{1em}
+
+\subsection*{Using the Lemma Environment}
+
+A lemma is a smaller theorem used to prove larger theorems:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Lemma Code}]
+\begin{verbatim}
+\begin{lemma}
+  If $n$ is even, then $n^2$ is even.
+\end{lemma}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+\begin{lemma}
+  If $n$ is even, then $n^2$ is even.
+\end{lemma}
+
+\vspace{1em}
+
+\subsection*{Using the Proof Environment}
+
+The \texttt{proof} environment creates a formal proof with a QED symbol at the end:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Proof Code}]
+\begin{verbatim}
+\begin{proof}
+  Suppose $n$ is even. Then $n = 2k$ for some 
+  integer $k$. Therefore:
+  \[
+    n^2 = (2k)^2 = 4k^2 = 2(2k^2)
+  \]
+  Since $n^2$ is a multiple of 2, $n^2$ is even.
+\end{proof}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+\begin{proof}
+  Suppose $n$ is even. Then $n = 2k$ for some integer $k$. Therefore:
+  \[
+    n^2 = (2k)^2 = 4k^2 = 2(2k^2)
+  \]
+  Since $n^2$ is a multiple of 2, $n^2$ is even.
+\end{proof}
+
+\vspace{1em}
+
+\subsection*{Unnumbered Environments}
+
+Add an asterisk to create unnumbered versions:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Unnumbered Theorem}]
+\begin{verbatim}
+\begin{theorem*}
+  This theorem has no number.
+\end{theorem*}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection*{Custom Theorem Names}
+
+Add optional text in brackets to customize the theorem name:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Custom Theorem Name}]
+\begin{verbatim}
+\begin{theorem}[Pythagorean Theorem]
+  In a right triangle, $a^2 + b^2 = c^2$.
+\end{theorem}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+\begin{theorem}[Pythagorean Theorem]
+  In a right triangle, $a^2 + b^2 = c^2$.
+\end{theorem}
+
+\vspace{1em}
+
+\subsection*{Using Corollary}
+
+A corollary is a consequence of a theorem:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Corollary Code}]
+\begin{verbatim}
+\begin{theorem}
+  All angles in a triangle sum to $180°$.
+\end{theorem}
+
+\begin{corollary}
+  Each angle in an equilateral triangle is $60°$.
+\end{corollary}
+\end{corollary}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:}
+\begin{theorem}
+  All angles in a triangle sum to $180°$.
+\end{theorem}
+
+\begin{corollary}
+  Each angle in an equilateral triangle is $60°$.
+\end{corollary}
+
+\vspace{1em}
+
+\subsection*{Complete Mathematical Paper Example}
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Full Example}]
+\begin{verbatim}
+\section{Number Theory}
+
+\begin{definition}
+  An integer $n$ is \textbf{perfect} if it equals 
+  the sum of its proper divisors.
+\end{definition}
+
+\begin{example}
+  The number 6 is perfect: $6 = 1 + 2 + 3$.
+\end{example}
+
+\begin{lemma}
+  If $n$ is perfect, then $n > 0$.
+\end{lemma}
+
+\begin{proof}
+  This follows directly from the definition.
+\end{proof}
+
+\begin{theorem}[Euclid-Euler Theorem]
+  An even perfect number has the form 
+  $n = 2^{p-1}(2^p - 1)$ where $2^p - 1$ is prime.
+\end{theorem}
+\end{verbatim}
+\end{tcolorbox}
+
+\vspace{1em}
+
+\subsection*{Quick Theorem Reference}
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Environment} & \textbf{Purpose} \\
+    \hline
+    \texttt{theorem} & Main mathematical statement \\
+    \hline
+    \texttt{lemma} & Helper lemma (numbered) \\
+    \hline
+    \texttt{corollary} & Consequence of a theorem \\
+    \hline
+    \texttt{definition} & Define a concept \\
+    \hline
+    \texttt{proof} & Formal proof (adds QED) \\
+    \hline
+    \texttt{remark} & Non-formal comment \\
+    \hline
+  \end{tabular}
+  \caption{Table 4: Theorem Environment Types}
+\end{table}
+
+\vspace{1em}
+
+\Part{Hyperlinks}
+
+The \texttt{hyperref} package enables clickable links.
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Hyperlink Code}]
+\begin{verbatim}
+\href{https://www.overleaf.com}{Click here to visit Overleaf}
+
+% Link within document
+See Section \ref{sec:intro} for the introduction.
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output:} \href{https://www.overleaf.com}{Click here to visit Overleaf}
+
+\vspace{0.5em}
+
+\textbf{Key points:}
+\begin{itemize}[nosep]
+    \item \texttt{\textbackslash href\{URL\}\{display text\}} creates a clickable link
+    \item \texttt{\textbackslash ref\{\}} references labeled sections, tables, and figures
+    \item \texttt{\textbackslash label\{\}} must be placed before the reference
+\end{itemize}
+
+\Part{Citations and Bibliography (APA/MLA Style)}
+
+Professional documents require citations. LaTeX uses BibTeX for bibliography management.
+
+\subsection*{Setting Up BibTeX}
+
+First, create a \texttt{references.bib} file with your sources:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Example references.bib}]
+\begin{verbatim}
+@article{Einstein1905,
+  title={On the Electrodynamics of Moving Bodies},
+  author={Einstein, Albert},
+  year={1905},
+  journal={Annalen der Physik}
+}
+
+@book{Knuth1984,
+  title={The TeXbook},
+  author={Knuth, Donald E.},
+  year={1984},
+  publisher={Addison-Wesley}
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection*{Using Citations in Your Document}
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Citation Code}]
+\begin{verbatim}
+% In preamble:
+\usepackage[style=apa]{biblatex}
+\addbibresource{references.bib}
+
+% In document:
+According to \cite{Einstein1905}, the theory of
+relativity revolutionized physics.
+
+% At the end of document:
+\printbibliography
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Citation styles available:}
+\begin{itemize}[nosep]
+    \item \texttt{style=apa} --- American Psychological Association
+    \item \texttt{style=mla} --- Modern Language Association
+    \item \texttt{style=chicago} --- Chicago Manual of Style
+    \item \texttt{style=ieee} --- IEEE style (for engineering)
+\end{itemize}
+
+\Part{Using ChatGPT to Convert Word Documents to LaTeX}
+
+If you have a document created in Word or another format, ChatGPT can help convert it to LaTeX code.
+
+\subsection*{Process}
+
+\begin{enumerate}[nosep]
+    \item Copy the text from your Word document
+    \item Open \href{https://chat.openai.com}{ChatGPT}
+    \item Paste the text and ask: \textit{``Convert this to LaTeX code with proper formatting, tables, and equations''}
+    \item Copy the generated LaTeX code
+    \item Paste it into your \texttt{.tex} file
+    \item Adjust and debug as needed
+\end{enumerate}
+
+\begin{tcolorbox}[colback=warningRed, title=\textbf{Important Note}]
+ChatGPT output usually requires adjustments. Always review the generated code and verify:
+\begin{itemize}[nosep]
+    \item All packages are included in the preamble
+    \item Syntax is correct
+    \item Formatting matches your needs
+\end{itemize}
+\end{tcolorbox}
+
+\Part{Labels and References (\texttt{\textbackslash label} and \texttt{\textbackslash ref})}
+
+Labels and references allow you to automatically number and cross-reference figures, tables, equations, and sections throughout your document.
+
+\subsection*{Creating a Label}
+
+Any labeled object (section, figure, table, equation) can be referenced later. Use \texttt{\textbackslash label\{\}} right after creating the object:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Labeling Examples}]
+\begin{verbatim}
+% Labeling a section
+\section{My Section}
+\label{sec:mysection}
+
+% Labeling a figure
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=4in]{shrek.jpg}
+  \caption{A funny character}
+  \label{fig:shrek}
+\end{figure}
+
+% Labeling a table
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|c|c|}
+    \hline
+    A & B \\
+    \hline
+  \end{tabular}
+  \caption{Sample Table}
+  \label{tab:sample}
+\end{table}
+
+% Labeling an equation
+\begin{equation}
+  E = mc^2
+  \label{eq:einstein}
+\end{equation}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection*{Referencing Objects}
+
+Use \texttt{\textbackslash ref\{\}} to insert the number of the labeled object:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Reference Examples}]
+\begin{verbatim}
+% Reference a figure
+As shown in Figure \ref{fig:shrek}, this is a character.
+
+% Reference a table
+Table \ref{tab:sample} displays data.
+
+% Reference an equation
+The famous equation \ref{eq:einstein} relates 
+mass and energy.
+
+% Reference a section
+See Section \ref{sec:mysection} for more details.
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Output Example:} As shown in Figure \ref{fig:shrek_example}, this demonstrates the Shrek character.
+
+\vspace{0.5em}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=3in]{shrek.jpg}
+  \caption{Shrek - A Famous Animated Character}
+  \label{fig:shrek_example}
+\end{figure}
+
+\vspace{0.5em}
+
+\textbf{Key points:}
+\begin{itemize}[nosep]
+    \item Labels must come immediately after the object (caption, equation, section title)
+    \item Use descriptive label names: \texttt{fig:}, \texttt{tab:}, \texttt{eq:}, \texttt{sec:} prefixes help organize
+    \item \texttt{\textbackslash ref\{\}} automatically inserts the correct number
+    \item If references show as ``??'', compile twice to update references
+    \item Labels only work with numbered objects (sections, tables with captions, figures with captions, equations)
+\end{itemize}
+
+\Part{Table of Contents}
+
+LaTeX can automatically generate a table of contents from your section headings.
+
+\subsection*{Inserting a Table of Contents}
+
+Add this command where you want the table of contents to appear (usually after the title page):
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Table of Contents Code}]
+\begin{verbatim}
+\begin{document}
+
+\begin{center}
+  {\Large \textbf{My Document}}
+\end{center}
+
+\tableofcontents          % Insert TOC here
+\newpage                  % Start content on new page
+
+\section{Introduction}
+Content here...
+
+\section{Methods}
+More content...
+
+\end{document}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Important:} Compile your document \textbf{twice} for the table of contents to appear correctly (first pass collects headings, second pass generates the TOC).
+
+\subsection*{Controlling TOC Depth}
+
+By default, all sections and subsections appear. To control which levels are included:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Controlling TOC Depth}]
+\begin{verbatim}
+% Show only sections (not subsections)
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+% Show sections and subsections
+\setcounter{tocdepth}{2}
+\tableofcontents
+\end{verbatim}
+\end{tcolorbox}
+
+\Part{Title Pages}
+
+A professional title page includes the document title, author, date, and institution.
+
+\subsection*{Simple Title Page}
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Simple Title Page}]
+\begin{verbatim}
+\begin{document}
+
+\begin{titlepage}
+  \begin{center}
+    \vspace*{1cm}
+    
+    {\huge\bfseries My Research Paper}\\
+    \vspace{0.5cm}
+    {\LARGE A Study of Something Important}\\
+    
+    \vspace{2cm}
+    
+    {\Large By}\\
+    {\Large John Doe}\\
+    
+    \vspace{2cm}
+    
+    {\large Department of Computer Science}\\
+    {\large University Name}\\
+    
+    \vspace{2cm}
+    
+    {\large January 5, 2026}
+    
+    \vfill
+    
+  \end{center}
+\end{titlepage}
+
+\newpage
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+% Your content starts here
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection*{Using the Built-in \texttt{\textbackslash maketitle} Command}
+
+Alternatively, use LaTeX's built-in title command in the preamble:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Built-in Title Page}]
+\begin{verbatim}
+% In preamble:
+\title{My Research Paper}
+\author{John Doe}
+\date{January 5, 2026}
+
+% In document:
+\begin{document}
+
+\maketitle    % Creates the title page automatically
+
+\tableofcontents
+\newpage
+
+\section{Introduction}
+% Your content starts here
+\end{verbatim}
+\end{tcolorbox}
+
+\Part{Fancy Headers and Page Numbering}
+
+The \texttt{fancyhdr} package allows custom headers, footers, and page numbering styles.
+
+\subsection*{Setting Up Fancy Headers}
+
+Add to your preamble:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Basic Fancy Header Setup}]
+\begin{verbatim}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}           % Activate fancy style
+
+% Define header content
+\lhead{Left Side}           % Left header
+\chead{Center}              % Center header
+\rhead{Right Side}          % Right header
+
+% Define footer content
+\lfoot{Left Footer}         % Left footer
+\cfoot{\thepage}            % Center footer (page number)
+\rfoot{Right Footer}        % Right footer
+
+\renewcommand{\headrulewidth}{0.4pt}    % Header line
+\renewcommand{\footrulewidth}{0.4pt}    % Footer line
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection*{Example: Document with Custom Headers}
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Complete Header Example}]
+\begin{verbatim}
+% In preamble:
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\lhead{\textit{My Document}}
+\chead{}
+\rhead{Chapter 1}
+
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+
+% In document:
+\begin{document}
+
+\section{Introduction}
+Your content here. Notice the headers
+and footers on the pages!
+
+\newpage
+
+\section{Methods}
+The page numbers automatically update.
+
+\end{document}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection*{Page Numbering Styles}
+
+Control how page numbers are displayed:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Page Numbering Styles}]
+\begin{verbatim}
+% Arabic numerals (1, 2, 3, ...)
+\pagenumbering{arabic}
+
+% Roman numerals (i, ii, iii, ...)
+\pagenumbering{roman}
+
+% Capital Roman numerals (I, II, III, ...)
+\pagenumbering{Roman}
+
+% Letters (a, b, c, ...)
+\pagenumbering{alph}
+
+% Reset page counter
+\setcounter{page}{1}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection*{Professional Example: Title Page + TOC + Content}
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Complete Document Structure}]
+\begin{verbatim}
+\documentclass{article}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\rhead{My Paper}
+\cfoot{\thepage}
+
+\title{Research on Something Important}
+\author{Jane Smith}
+\date{\today}
+
+\begin{document}
+
+% Title page with roman numerals
+\pagenumbering{roman}
+\maketitle
+
+% Table of contents
+\newpage
+\tableofcontents
+
+% Switch to arabic numerals for main content
+\newpage
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\section{Introduction}
+Main content starts here...
+
+\section{Methods}
+More content...
+
+\end{document}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Key points:}
+\begin{itemize}[nosep]
+    \item Use roman numerals (i, ii, iii) for front matter (title page, TOC, preface)
+    \item Switch to arabic numerals (1, 2, 3) for main content with \texttt{\textbackslash pagenumbering\{arabic\}}
+    \item \texttt{\textbackslash thepage} inserts the current page number
+    \item Fancy headers are disabled on the first page of sections by default; use \texttt{\textbackslash fancypagestyle\{plain\}\{\}} to override
+\end{itemize}
+
+\vspace{1em}
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{|l|l|}
+    \hline
+    \textbf{Command} & \textbf{Purpose} \\
+    \hline
+    \texttt{\textbackslash textbf\{text\}} & Make text bold \\
+    \hline
+    \texttt{\textbackslash textit\{text\}} & Make text italic \\
+    \hline
+    \texttt{\textbackslash texttt\{text\}} & Monospace text \\
+    \hline
+    \texttt{\textbackslash section\{Title\}} & Create a section \\
+    \hline
+    \texttt{\textbackslash includegraphics\{file\}} & Insert image \\
+    \hline
+    \texttt{\textbackslash cite\{key\}} & Cite a reference \\
+    \hline
+    \texttt{\textbackslash href\{url\}\{text\}} & Create hyperlink \\
+    \hline
+    \texttt{begin\{table\}...\textbackslash end\{table\}} & Create table \\
+    \hline
+    \texttt{\$...\$} & Inline math \\
+    \hline
+    \texttt{\textbackslash[...\textbackslash]} & Display equation \\
+    \hline
+  \end{tabular}
+  \caption{Table 2: LaTeX Quick Reference}
+\end{table}
+
+\vspace{1em}
+
+\section*{Your Next Step: Practice}
+
+Now that you've learned the fundamentals:
+
+\begin{tcolorbox}[colback=localGreen, title=\textbf{Action Items}]
+\begin{enumerate}[nosep]
+    \item Open the \texttt{first\_latex} folder in your editor
+    \item Create a new document with:
+    \begin{itemize}[nosep]
+        \item A centered title with \texttt{\textbackslash textbf\{\}}
+        \item At least two sections
+        \item One bold paragraph
+        \item A simple table with a caption
+        \item An inline equation (e.g., $E = mc^2$)
+        \item A hyperlink
+    \end{itemize}
+    \item Compile your document and review the output
+    \item Experiment with different styling options
+\end{enumerate}
+\end{tcolorbox}
+
+\vspace{1em}
+
+\section*{Advanced Topic: Customization and Modularity in LaTeX}
+
+Notice throughout this document that we use a custom command called \texttt{\textbackslash Part\{\}} to automatically number sections. This demonstrates one of LaTeX's greatest strengths: \textbf{customizability and modularity}. Instead of manually typing ``Part 1:'', ``Part 2:'', etc., we defined a reusable command that handles numbering automatically.
+
+\subsection*{How the \texttt{\textbackslash Part} Command Works}
+
+In the \texttt{preamble.tex} file, we added these lines:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Custom Part Counter and Command}]
+\begin{verbatim}
+% Create a new counter
+\newcounter{partcounter}
+
+% Set the starting value
+\setcounter{partcounter}{0}
+
+% Define a custom command with auto-incrementing counter
+\newcommand{\Part}[1]{%
+    \stepcounter{partcounter}%
+    \section*{Part \thepartcounter: #1}%
+}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Breaking this down:}
+\begin{itemize}[nosep]
+    \item \texttt{\textbackslash newcounter\{partcounter\}} --- Creates a new counter variable
+    \item \texttt{\textbackslash setcounter\{partcounter\}\{0\}} --- Initializes the counter to 0
+    \item \texttt{\textbackslash newcommand\{\textbackslash Part\}[1]} --- Defines a command that accepts 1 argument (the title)
+    \item \texttt{\textbackslash stepcounter\{partcounter\}} --- Increments the counter by 1 before each section
+    \item \texttt{\textbackslash thepartcounter} --- Displays the current counter value
+    \item \texttt{\%} --- Ends lines to prevent unwanted spaces
+\end{itemize}
+
+\subsection*{Usage Throughout the Document}
+
+Instead of writing:
+
+\begin{tcolorbox}[colback=warningRed, title=\textbf{The Old Way (Not Used Here)}]
+\begin{verbatim}
+\section*{Part 1: Essential Packages and Preamble Setup}
+  % content
+\section*{Part 2: Formatting Text}
+  % content
+\section*{Part 3: Headings and Structure}
+  % content
+% ... and so on, manually updating numbers
+\end{verbatim}
+\end{tcolorbox}
+
+We use the custom command:
+
+\begin{tcolorbox}[colback=localGreen, title=\textbf{The New Way (Used in This Document)}]
+\begin{verbatim}
+\Part{Essential Packages and Preamble Setup}
+  % content
+\Part{Formatting Text}
+  % content
+\Part{Headings and Structure}
+  % content
+% Numbers update automatically!
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection*{Benefits of This Approach}
+
+\begin{itemize}[nosep]
+    \item \textbf{Automatic numbering:} Add, remove, or reorder sections without manual updates
+    \item \textbf{Consistency:} All parts use the same formatting automatically
+    \item \textbf{Easy maintenance:} Change the formatting once in the preamble; it updates everywhere
+    \item \textbf{Modularity:} The preamble is separate from the document content
+    \item \textbf{Reusability:} Copy the preamble to new documents and start using \texttt{\textbackslash Part\{\}} immediately
+\end{itemize}
+
+\subsection*{Creating Your Own Custom Commands}
+
+You can create any custom command you need using \texttt{\textbackslash newcommand}:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Custom Command Examples}]
+\begin{verbatim}
+% Command with no arguments
+\newcommand{\mytitle}{My Important Title}
+
+% Command with 1 argument
+\newcommand{\highlight}[1]{\textbf{\textcolor{red}{#1}}}
+
+% Command with 2 arguments
+\newcommand{\myfraction}[2]{\frac{#1}{#2}}
+
+% Use them in your document:
+\mytitle              % Outputs: My Important Title
+\highlight{Warning!} % Outputs: Warning! in bold red
+\myfraction{a}{b}     % Outputs: a/b as a fraction
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection*{Creating Custom Environments}
+
+For larger blocks of content, define custom environments:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Custom Environment Example}]
+\begin{verbatim}
+% In preamble:
+\newenvironment{highlight}
+  {\begin{tcolorbox}[colback=yellow!20]}
+  {\end{tcolorbox}}
+
+% In document:
+\begin{highlight}
+This text will be in a yellow highlight box!
+\end{highlight}
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection*{Modular Document Structure}
+
+For large projects, organize your document into separate files:
+
+\begin{tcolorbox}[colback=codeGray, title=\textbf{Modular Project Example}]
+\begin{verbatim}
+% main.tex
+\documentclass{article}
+\input{preamble}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+\newpage
+
+% Include separate chapter files
+\input{chapters/introduction.tex}
+\input{chapters/methods.tex}
+\input{chapters/results.tex}
+\input{chapters/discussion.tex}
+
+\printbibliography
+
+\end{document}
+\end{verbatim}
+\end{tcolorbox}
+
+\textbf{Benefits of modularity:}
+\begin{itemize}[nosep]
+    \item Keep each chapter in a separate file for easier editing
+    \item Reuse preambles across multiple projects
+    \item Share standardized preambles with collaborators
+    \item Version control is easier with modular structure
+    \item Compile individual chapters for testing
+\end{itemize}
+
+\subsection*{Key Takeaways}
+
+LaTeX's power comes from its ability to be customized:
+\begin{itemize}[nosep]
+    \item Define counters for automatic numbering
+    \item Create custom commands with \texttt{\textbackslash newcommand}
+    \item Build reusable environments with \texttt{\textbackslash newenvironment}
+    \item Separate content into modular files
+    \item Use preambles to maintain consistency across documents
+    \item Share and reuse code through packages and templates
+\end{itemize}
+
+As you become more advanced, you'll find that LaTeX allows you to create professional workflows tailored to your specific needs!
+
+\vspace{2em}
+
+\begin{itemize}[nosep]
+    \item \textbf{Compilation error?} Check for missing closing braces \texttt{\}}
+    \item \textbf{Image not showing?} Verify the filename and file location
+    \item \textbf{Bibliography empty?} Make sure you've run \texttt{bibtex} or used \texttt{biblatex}
+    \item \textbf{Math symbols not working?} Ensure you've included \texttt{\textbackslash usepackage\{amssymb\}}
+\end{itemize}
+
+\vspace{2em}
+
+\begin{center}
+    {\large \textbf{Good luck with your LaTeX journey!}}
+\end{center}
+
+\end{document}
+

@@ -1,0 +1,202 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+
+% Color definitions
+\definecolor{overleafBlue}{RGB}{230,245,255}
+\definecolor{localGreen}{RGB}{235,250,235}
+\definecolor{warningRed}{RGB}{255,240,240}
+\definecolor{titleGray}{RGB}{80,80,80}
+
+\tcbset{
+    colframe=black,
+    boxrule=0.8pt,
+    arc=4pt,
+    left=8pt,
+    right=8pt,
+    top=6pt,
+    bottom=6pt
+}
+
+\begin{document}
+
+\begin{center}
+    {\Large \textbf{How to Install and Use LaTeX}}\\
+    \vspace{4pt}
+    {\large \textbf{Overleaf vs Local Setup}}\\
+    \vspace{6pt}
+    {\color{titleGray}Last Updated: \today}
+\end{center}
+
+\vspace{1em}
+
+\section*{Purpose}
+This document defines two approved workflows for writing and compiling LaTeX documents:
+\begin{itemize}[nosep]
+    \item Directly on Overleaf (cloud-based)
+    \item Locally on a personal machine (MacTeX + VSCode)
+\end{itemize}
+
+It specifies when to use each option, along with their advantages and limitations.
+
+
+
+\section*{Option A: Overleaf (Cloud-Based LaTeX)}
+
+\begin{tcolorbox}[colback=overleafBlue, title=\textbf{Overview}]
+Overleaf is a browser-based LaTeX editor that requires no local installation and supports real-time collaboration.
+\end{tcolorbox}
+
+\subsection*{Procedure}
+\begin{enumerate}[nosep]
+    \item Go to \url{https://www.overleaf.com}
+    \item Create a new project (blank or template)
+    \item Edit \texttt{.tex} files directly in the browser
+    \item Click \textbf{Recompile} to generate the PDF
+\end{enumerate}
+
+\subsection*{Pros}
+\begin{itemize}[nosep]
+    \item Very easy to use (no setup required)
+    \item Real-time collaboration and commenting
+    \item Automatic package management
+    \item Ideal for quick drafts and shared documents
+\end{itemize}
+
+\subsection*{Cons}
+\begin{itemize}[nosep]
+    \item Compile time limits (especially on free tier)
+    \item Can become slow or unstable near major conference deadlines
+    \item Limited control over compiler versions and system tools
+    \item Less suitable for large projects with many figures or custom scripts
+\end{itemize}
+
+\begin{tcolorbox}[colback=warningRed, title=\textbf{Operational Risk}]
+During peak academic deadlines (e.g., conference submissions), Overleaf servers may experience latency or failed compiles.
+\end{tcolorbox}
+
+\section*{Option B: Local LaTeX (MacTeX + VSCode)}
+
+\begin{tcolorbox}[colback=localGreen, title=\textbf{Overview}]
+Local compilation uses a full LaTeX distribution installed on your machine, typically with VSCode and LaTeX Workshop.
+\end{tcolorbox}
+
+\subsection*{Procedure}
+\begin{enumerate}[nosep]
+    \item Install MacTeX from \url{https://www.tug.org/mactex/}
+    \item Install VSCode and the \textbf{LaTeX Workshop} extension
+    \item Open the project folder locally
+    \item Compile using \texttt{latexmk}, \texttt{pdflatex}, or \texttt{xelatex}
+\end{enumerate}
+
+\subsection*{Local Installation (macOS) --- Command Line Alternatives}
+Alternatively, if you prefer not to install via the graphical \texttt{.dmg} installer, the following command-line approaches are common.
+
+\begin{tcolorbox}[colback=localGreen, title=\textbf{Option 1: Install via Homebrew (recommended for CLI users)}]
+	\textbf{MacTeX (full distribution, large download):}
+\begin{verbatim}
+brew update
+brew install --cask mactex
+
+# Verify
+latex --version
+pdflatex --version
+latexmk -v
+\end{verbatim}
+
+\textbf{MacTeX no-GUI variant (still TeX Live, smaller than full MacTeX):}
+\begin{verbatim}
+brew update
+brew install --cask mactex-no-gui
+\end{verbatim}
+
+\textbf{BasicTeX (minimal TeX Live; install packages as needed):}
+\begin{verbatim}
+brew update
+brew install --cask basictex
+
+# BasicTeX usually requires installing missing LaTeX packages via tlmgr
+sudo tlmgr update --self
+\end{verbatim}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=localGreen, title=\textbf{Option 2: Install from a downloaded installer using \texttt{installer}}]
+This is useful for offline installs or when you already have the installer locally.
+
+	\textbf{If you have a \texttt{.pkg} file:}
+\begin{verbatim}
+# Example: install a local PKG
+sudo installer -pkg /path/to/MacTeX.pkg -target /
+\end{verbatim}
+
+	
+\textbf{If you have a \texttt{.dmg} but want a fully CLI flow (no GUI):}
+\begin{verbatim}
+# Mount the DMG
+hdiutil attach /path/to/MacTeX-*.dmg
+
+# Find the PKG inside the mounted volume
+ls /Volumes
+ls "/Volumes/MacTeX-*/"
+
+# Install the PKG (path may vary by release)
+sudo installer -pkg "/Volumes/MacTeX-*/MacTeX.pkg" -target /
+
+# Unmount when done
+hdiutil detach "/Volumes/MacTeX-*/"
+\end{verbatim}
+\end{tcolorbox}
+
+\subsection*{Post-Install Checks (macOS)}
+\begin{enumerate}[nosep]
+    \item Confirm TeX binaries are on your PATH:
+    \begin{verbatim}
+which pdflatex
+which latexmk
+\end{verbatim}
+    \item If commands are not found, macOS typically uses \texttt{/Library/TeX/texbin}. You can add it to your shell configuration (\texttt{~/.zshrc}):
+    \begin{verbatim}
+export PATH="/Library/TeX/texbin:$PATH"
+\end{verbatim}
+    \item (Optional) Update TeX Live packages (may take time and requires admin privileges in some setups):
+    \begin{verbatim}
+sudo tlmgr update --self
+sudo tlmgr update --all
+\end{verbatim}
+\end{enumerate}
+
+\subsection*{Pros}
+\begin{itemize}[nosep]
+    \item Highly reliable and robust
+    \item No compile time or project size limits
+    \item Full control over compiler, packages, and build process
+    \item Suitable for large documents, heavy figures, and automation
+\end{itemize}
+
+\subsection*{Cons}
+\begin{itemize}[nosep]
+    \item Initial setup is more complicated
+    \item Debugging LaTeX errors requires more familiarity
+    \item Requires manual package management
+\end{itemize}
+
+\begin{tcolorbox}[colback=localGreen!85!white, title=\textbf{Best Practice}]
+Local compilation is strongly recommended for final submissions, large projects, and deadline-critical work.
+\end{tcolorbox}
+
+
+\section*{Recommendation Summary}
+
+\begin{tcolorbox}[colback=white]
+\begin{itemize}
+    \item Use \textbf{Overleaf} for early drafts, collaboration, and lightweight documents.
+    \item Use \textbf{Local LaTeX} for serious writing, large projects, and final submissions.
+\end{itemize}
+\end{tcolorbox}
+
+
+\end{document}

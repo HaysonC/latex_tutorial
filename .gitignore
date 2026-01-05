@@ -1,0 +1,19 @@
+# latex: ignore aux and build files
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bcf
+
+
+# macOS specific files
+.DS_Store
+# Thumbnails
+._*
+
+
